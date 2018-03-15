@@ -49,12 +49,12 @@ def search_clone(content, i, start):
         seq = content[i:i+j]
         if seq in seen_clones:
             pass
-        seen_clones.add(seq)
         text = ''.join(seq)
         docs = fm.search(text)
         c = sum([doc.count[0] for doc in docs])
         if c <= 1:
             break
+        seen_clones.add(seq)
         frags = clone_fragments.iteritems(prefix=seq)
         if clone_fragments.has_subtrie(seq) or seq in clone_fragments:
             if all(map(lambda item: item[1][0] < c, frags)):
